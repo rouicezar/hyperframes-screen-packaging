@@ -1,6 +1,6 @@
 ---
 name: hyperframes-screen-packaging
-description: Package landscape or portrait videos—including talking-head footage, screen recordings, mixed person-and-screen edits, tutorials, explainers, and rough cuts—into validated final videos with HyperFrames motion graphics, semantic visual routing, protected subjects and evidence, authoritative subtitles, frame-accurate inserts, and verified audio/video delivery. Use when the user asks to package, beautify, finish, enhance, or review a spoken video or reusable video-packaging workflow.
+description: Package one or more landscape or portrait videos—including talking-head footage, screen recordings, same-story person-and-screen edits, tutorials, explainers, and rough cuts—into correctly mapped, validated final videos with HyperFrames motion graphics, semantic visual routing, protected subjects and evidence, authoritative subtitles, frame-accurate inserts, and verified audio/video delivery. Use when the user asks to package, beautify, finish, enhance, test, or review spoken videos or a reusable video-packaging workflow, especially when multiple source files, black-screen intervals, full-length delivery, or mixed footage could be interpreted incorrectly.
 ---
 
 # HyperFrames Screen Packaging
@@ -20,6 +20,11 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 
 ## Non-negotiable contract
 
+- Treat every source file as an independent work by default. Never combine sources merely to cover a test matrix or demonstrate mixed-layout capability.
+- Before classifying shots, create and validate `edit/input-manifest.json` with `scripts/validate_input_manifest.py`.
+- Permit a mixed output only when the user explicitly authorizes mixing, all sources belong to the same story, actual-media alignment is verified, and exactly one audio master is declared. If suitable mixed sources do not exist, report that the mixed test condition is unavailable.
+- Distinguish `full` from `sample` before implementation. Never satisfy a full-delivery request with a short excerpt.
+- Map every source marked `deliver=true` to an output. Final output count and source coverage must match the validated manifest.
 - Classify canvas and footage first: landscape/portrait; talking-head/screen/mixed/other.
 - Preserve source aspect ratio, frame rate, order, timing, subtitles, and audio unless the user requests editorial changes.
 - Protect the evidence appropriate to the footage:
@@ -41,7 +46,7 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 
 ## Stage gates
 
-### 1. Inventory and classify
+### 1. Inventory, relate, and lock delivery scope
 
 Create `<video-folder>/edit/`. Run:
 
@@ -51,13 +56,27 @@ python3 scripts/inspect_source.py <source-video> --srt <subtitle.srt> --output <
 
 Record:
 
+- all source files, alternates, duplicates, and likely audio ownership;
+- whether the user asked for full outputs or explicit samples;
+- one-line topic/claim summary for every source;
+- a source-to-output mapping;
 - landscape or portrait;
 - talking-head, screen, mixed, or other;
 - subject/evidence safe zones;
 - first two seconds;
 - black/blank candidates when present.
 
-Choose one route:
+Create `<edit>/input-manifest.json`. Default to one independent output per deliverable source. Validate it before writing designs:
+
+```bash
+python3 scripts/validate_input_manifest.py \
+  <edit>/input-manifest.json \
+  --report <edit>/input-manifest-validation.md
+```
+
+Stop on failure. Do not infer that a talking-head file and a screen-recording file form a mixed edit. “Mixed footage” describes a same-story output, not permission to combine unrelated sources.
+
+Then choose one visual route per output:
 
 - black/blank route: use frame-accurate full-frame replacement where appropriate;
 - continuous-picture route: create a coverage map and decide per segment between preserve, overlay, reframe, B-roll, or deliberate replacement.
@@ -67,6 +86,8 @@ Choose one route:
 Write `<edit>/requirements.md` before implementation:
 
 - source specification and footage class;
+- validated source-to-output mapping and delivery scope (`full` or `sample`);
+- topic and audio ownership for every source;
 - target platform and unchanged/changed aspect ratio;
 - subtitle authority;
 - protected subject/evidence;
@@ -87,6 +108,8 @@ Write `<edit>/design.md` and a segment table. For every segment record:
 - subtitle zone.
 
 Prefer no overlay over one that covers a face, gesture, cursor target, or proof.
+
+Write a separate segment table for every output. Do not reuse narration, graphics, or evidence from another independent source.
 
 For continuous-picture footage, “preserve” does not mean “do nothing.” It may still use subtitles, controlled crop, color/contrast correction, sound-supported emphasis, lightweight accents, or a transition into a semantic insert.
 
@@ -131,8 +154,17 @@ python3 scripts/validate_delivery.py \
 
 Inspect opening, ending, every transition/boundary, each hero frame, and subject/evidence safety. Rename to `<edit>/final.mp4` only after validation passes.
 
-Update `<edit>/project.md`.
+For every output, verify:
+
+- its bound source IDs match `input-manifest.json`;
+- `scope=full` duration matches the source within one frame;
+- `scope=sample` is explicitly requested and labeled as a sample;
+- every deliverable source has a final file;
+- no unrelated source audio or picture appears;
+- black/blank overlays remain inside confirmed half-open frame intervals.
+
+Update `<edit>/project.md`. Completion is forbidden while manifest source coverage is incomplete.
 
 ## Handoff
 
-Report final path, planning documents, EDL, progress and validation paths, canvas/footage classification, inserted frame ranges, templates/components, codec and duration, decode and audio results, warnings/fallbacks, version-control status, and the next step.
+Report one row per output: final path, source IDs, topic, delivery scope, duration, canvas/footage classification, inserted frame ranges, templates/components, decode and audio results. Also report planning documents, manifest validation, EDL, progress, warnings/fallbacks, version-control status, and the next step.

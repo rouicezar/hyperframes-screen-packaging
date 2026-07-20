@@ -1,0 +1,39 @@
+{
+  "delivery_scope": "full",
+  "sources": [
+    {
+      "id": "camera",
+      "file": "camera.mp4",
+      "theme": "same product tutorial",
+      "story_id": "product-tutorial",
+      "role": "talking-head",
+      "audio_role": "authoritative",
+      "deliver": true
+    },
+    {
+      "id": "screen",
+      "file": "screen.mp4",
+      "theme": "same product tutorial",
+      "story_id": "product-tutorial",
+      "role": "screen-recording",
+      "audio_role": "muted",
+      "deliver": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "tutorial-final",
+      "file": "tutorial-final.mp4",
+      "source_ids": ["camera", "screen"],
+      "mode": "mixed",
+      "scope": "full",
+      "mixed_authorization": {
+        "user_explicit": true,
+        "same_story": true,
+        "alignment_evidence": "Opening slate and three distributed speech landmarks match without drift.",
+        "alignment_verified": true,
+        "audio_master_source_id": "camera"
+      }
+    }
+  ]
+}

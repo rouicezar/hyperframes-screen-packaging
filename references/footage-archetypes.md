@@ -55,7 +55,18 @@ If semantic meaning, visible target, and cursor focus do not all match, keep raw
 
 ## Mixed footage
 
-Classify each segment separately. Do not reuse a talking-head safe zone after the cut changes to a screen, or a screen annotation after returning to the person.
+Mixed footage means person and screen material that belongs to the same story and intended output. It may already alternate inside one source, or exist as separately recorded camera and screen tracks with explicit production alignment.
+
+Do not create mixed footage by joining arbitrary files. Before mixing separate sources, require:
+
+- explicit user authorization to combine them;
+- the same topic, story, or deliverable;
+- verified transcript, timecode, slate/audio transient, or production evidence that explains alignment;
+- one declared authoritative audio source, with other duplicate voice tracks muted.
+
+Matching duration alone is not alignment evidence. Check multiple landmarks across the timeline for drift. If any condition is missing, keep the sources independent. A request to test mixed-layout capability does not authorize combining unrelated sources; report that the required same-story test material is unavailable.
+
+After the relationship gate passes, classify each segment separately. Do not reuse a talking-head safe zone after the cut changes to a screen, or a screen annotation after returning to the person.
 
 For picture-in-picture:
 

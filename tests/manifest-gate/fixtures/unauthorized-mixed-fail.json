@@ -1,0 +1,40 @@
+{
+  "delivery_scope": "sample",
+  "sources": [
+    {
+      "id": "person",
+      "file": "person.mp4",
+      "theme": "insurance talking head",
+      "story_id": "insurance-story",
+      "role": "talking-head",
+      "audio_role": "authoritative",
+      "deliver": true
+    },
+    {
+      "id": "screen",
+      "file": "screen.mp4",
+      "theme": "AI project screen tutorial",
+      "story_id": "ai-project-story",
+      "role": "screen-recording",
+      "audio_role": "muted",
+      "deliver": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "forced-mix",
+      "file": "forced-mix.mp4",
+      "source_ids": ["person", "screen"],
+      "mode": "mixed",
+      "scope": "sample",
+      "sample_reason": "test mixed packaging",
+      "mixed_authorization": {
+        "user_explicit": false,
+        "same_story": false,
+        "alignment_evidence": "",
+        "alignment_verified": false,
+        "audio_master_source_id": "person"
+      }
+    }
+  ]
+}

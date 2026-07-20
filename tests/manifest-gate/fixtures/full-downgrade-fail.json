@@ -1,0 +1,24 @@
+{
+  "delivery_scope": "full",
+  "sources": [
+    {
+      "id": "person",
+      "file": "person.mp4",
+      "theme": "insurance talking head",
+      "story_id": "insurance-story",
+      "role": "talking-head",
+      "audio_role": "authoritative",
+      "deliver": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "person-short-sample",
+      "file": "person-short-sample.mp4",
+      "source_ids": ["person"],
+      "mode": "independent",
+      "scope": "sample",
+      "sample_reason": "only render ten seconds"
+    }
+  ]
+}

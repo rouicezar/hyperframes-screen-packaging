@@ -4,13 +4,14 @@
 
 1. Project layout
 2. Input discovery
-3. Source analysis
-4. Choose black/blank or continuous-picture route
-5. Semantic planning
-6. Implementation
-7. Composition
-8. Self-evaluation
-9. Delivery
+3. Source relationship and delivery contract
+4. Source analysis
+5. Choose black/blank or continuous-picture route
+6. Semantic planning
+7. Implementation
+8. Composition
+9. Self-evaluation
+10. Delivery
 
 ## 1. Project layout
 
@@ -24,6 +25,8 @@ Keep source files untouched. Place all generated work inside the video's `edit/`
     ├── requirements.md
     ├── design.md
     ├── project.md
+    ├── input-manifest.json
+    ├── input-manifest-validation.md
     ├── source-inspection.json
     ├── edl.json
     ├── compose-filter.txt
@@ -46,7 +49,70 @@ Search the video folder before asking the user:
 
 The user often supplies black-screen phrases in chat. Preserve them verbatim in `requirements.md`.
 
-## 3. Source analysis
+## 3. Source relationship and delivery contract
+
+Do not treat a folder as one edit merely because it contains multiple videos. Build a source map before visual classification:
+
+| Source | Topic | Audio ownership | Role | Deliver? | Target output |
+|---|---|---|---|---|---|
+| file A | one-line claim | own / mute / external | talking-head / screen / other | true / false | output id |
+
+Default rules:
+
+- one source file is one independent work;
+- similar canvas, matching duration, or complementary footage type is not proof of a relationship;
+- a talking-head source plus a screen recording is not automatically mixed footage;
+- do not combine unrelated sources to satisfy “test portrait, screen, and mixed”;
+- if no same-story source pair exists, mark the mixed test unavailable;
+- do not use a short sample when the request says full, complete, entire, final, or equivalent.
+
+Create `input-manifest.json`:
+
+```json
+{
+  "delivery_scope": "full",
+  "sources": [
+    {
+      "id": "source-a",
+      "file": "../source-a.mp4",
+      "theme": "explicit one-line topic",
+      "story_id": "stable-story-id",
+      "role": "talking-head",
+      "audio_role": "authoritative",
+      "deliver": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "source-a-final",
+      "file": "finals/source-a-final.mp4",
+      "source_ids": ["source-a"],
+      "mode": "independent",
+      "scope": "full"
+    }
+  ]
+}
+```
+
+For `mode=mixed`, additionally require:
+
+```json
+{
+  "mixed_authorization": {
+    "user_explicit": true,
+    "same_story": true,
+    "alignment_evidence": "Verified slate plus matching speech landmarks near start, middle, and end",
+    "alignment_verified": true,
+    "audio_master_source_id": "source-a"
+  }
+}
+```
+
+For mixed sources, verify the claimed alignment against actual media. Matching duration alone is insufficient. Use a slate/audio transient and distributed transcript or waveform landmarks to detect offset and drift. Declare exactly one audio master so duplicate narration cannot survive composition.
+
+Run `scripts/validate_input_manifest.py`. A failing manifest blocks requirements sign-off and all rendering.
+
+## 4. Source analysis
 
 Use `scripts/inspect_source.py` for the first pass. Confirm:
 
@@ -66,7 +132,7 @@ slot_frames = end_frame - start_frame
 
 Use a half-open interval `[start_frame, end_frame)`.
 
-## 4. Choose the route
+## 5. Choose the route
 
 ### Black/blank route
 
@@ -90,7 +156,7 @@ Create a coverage map:
 
 No black frames does not mean no packaging. It means packaging must be evidence-aware rather than boundary-driven.
 
-## 5. Semantic planning
+## 6. Semantic planning
 
 Create a segment table with:
 
@@ -107,7 +173,7 @@ Create a segment table with:
 
 Select the template by claim structure, not surface appearance. A list of tools converging on one model is a concept/relationship, not automatically a ranking. Dates imply a timeline. A prerequisite and later stage imply status/flow, not numerical comparison.
 
-## 6. Implementation
+## 7. Implementation
 
 Adapt source rather than sample video:
 
@@ -122,7 +188,7 @@ Adapt source rather than sample video:
 
 When a slot is very short, simplify content rather than accelerate an unreadable template.
 
-## 7. Composition
+## 8. Composition
 
 Compose visual inserts on the unchanged source timeline. Use frame-derived timestamps and `setpts`.
 
@@ -137,7 +203,7 @@ Rules:
 - copy audio packets when no audio edit is requested;
 - keep EDL frame counts equal to rendered slot frame counts.
 
-## 8. Self-evaluation
+## 9. Self-evaluation
 
 Review rendered output, not only slot sources:
 
@@ -146,6 +212,8 @@ Review rendered output, not only slot sources:
 - each hero frame;
 - every subtitle style and long line;
 - the last 2 seconds.
+- one identity frame from every bound source;
+- source-to-output count and topic consistency.
 
 Look for:
 
@@ -157,11 +225,14 @@ Look for:
 - stale normal-screen annotations;
 - evidence hidden by a caption bar;
 - warm/orange pixels.
+- unrelated picture or audio from another source;
+- a sample mislabeled as a full output;
+- a deliverable source without a final file.
 
 Cap blind rerender loops. Diagnose the failure class before retrying.
 
-## 9. Delivery
+## 10. Delivery
 
-Run the delivery validator and save `validation.md`. Do not hand off a file that merely opens in a player. Require continuous decode with no errors.
+Run the delivery validator once per output and save one report per output. For `scope=full`, require source/final duration equality within one frame. Confirm all `deliver=true` sources are covered by real final files. Do not hand off a file that merely opens in a player. Require continuous decode with no errors.
 
 Update `project.md`. If the folder is not a Git repository, state that commit and push are unavailable instead of pretending they were completed.
