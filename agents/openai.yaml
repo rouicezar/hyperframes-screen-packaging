@@ -1,0 +1,5 @@
+interface:
+  display_name: "HyperFrames Screen Packaging"
+  short_description: "适配横竖屏、人物实拍、录屏与混合素材的通用视频包装流程"
+  brand_color: "#00A9CD"
+  default_prompt: "Use $hyperframes-screen-packaging to package this video according to its canvas, footage type, spoken meaning, and evidence-safe layout."
