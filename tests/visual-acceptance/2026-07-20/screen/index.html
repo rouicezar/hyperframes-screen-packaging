@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=1920,height=1280">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face{font-family:"PingFang SC";src:local("PingFang SC")}
+    *{box-sizing:border-box}html,body{margin:0;width:1920px;height:1280px;overflow:hidden;background:#06090e;font-family:"PingFang SC",sans-serif;color:#fff}
+    #root{position:relative;width:1920px;height:1280px;overflow:hidden}.clip{position:absolute}.source{inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+    .veil{inset:0;background:linear-gradient(180deg,rgba(3,8,14,.5),transparent 19%,transparent 78%,rgba(3,8,14,.28));pointer-events:none}
+    .label{left:76px;top:64px;padding:18px 30px;border-radius:20px;background:rgba(3,17,25,.88);border:2px solid rgba(95,210,230,.66);box-shadow:0 0 32px rgba(0,169,205,.24);font-size:31px;font-weight:800}
+    .focus{left:300px;top:282px;width:1310px;height:660px;border:5px solid #00A9CD;border-radius:26px;box-shadow:0 0 0 9999px rgba(2,7,12,.16),0 0 42px rgba(0,169,205,.3);pointer-events:none}
+    .focus:before,.focus:after{content:"";position:absolute;width:76px;height:5px;background:#5FD2E6;top:-5px}.focus:before{left:52px}.focus:after{right:52px}
+    .chip{right:76px;bottom:72px;width:480px;padding:22px 28px;border-radius:22px;background:rgba(4,17,25,.92);border-left:7px solid #00A9CD;box-shadow:0 18px 50px rgba(0,0,0,.38);font-size:29px;line-height:1.35}
+    .chip b{color:#8deeff}.dot{display:inline-block;width:14px;height:14px;margin-right:12px;border-radius:50%;background:#00A9CD;box-shadow:0 0 22px #00A9CD}
+  </style>
+</head><body><div id="root" data-composition-id="main" data-width="1920" data-height="1280" data-start="0" data-duration="10">
+  <video id="screen-source" class="clip source" data-start="0" data-duration="10" data-track-index="0" data-media-start="0" src="assets/source.mp4" muted playsinline></video>
+  <div id="veil" class="clip veil" data-start="0" data-duration="10" data-track-index="1"></div>
+  <div id="label" class="clip label" data-start="0" data-duration="10" data-track-index="2">AI 项目库 · 类型总览</div>
+  <div id="focus" class="clip focus" data-start="0" data-duration="10" data-track-index="3"></div>
+  <div id="chip" class="clip chip" data-start=".7" data-duration="9.3" data-track-index="4"><span class="dot"></span><b>证据区：</b>Agent、知识库、MCP 与多 Agent 模板</div>
+</div><script>
+window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+tl.from("#label",{x:-46,opacity:0,duration:.38,ease:"power3.out"},0)
+  .from("#focus",{scale:.96,opacity:0,duration:.5,ease:"power3.out"},.06)
+  .from("#chip",{x:44,opacity:0,duration:.42,ease:"power3.out"},.7);
+window.__timelines.main=tl;
+</script></body></html>

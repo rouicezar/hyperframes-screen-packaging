@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1920,height=1080">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"PingFang SC";src:local("PingFang SC")}
+*{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#05090f;font-family:"PingFang SC",sans-serif;color:#fff}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden}.clip{position:absolute}.screen{inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+.wash{inset:0;background:linear-gradient(180deg,rgba(4,9,16,.5),transparent 22%,transparent 76%,rgba(4,9,16,.34));z-index:1}
+.rail{left:520px;right:72px;top:56px;height:126px;padding:20px 28px;display:flex;align-items:center;gap:18px;border-radius:26px;background:rgba(3,15,23,.96);border:2px solid rgba(95,210,230,.6);box-shadow:0 18px 54px rgba(0,0,0,.34);z-index:10}
+.step{height:72px;flex:1;display:flex;align-items:center;justify-content:center;border-radius:17px;background:rgba(255,255,255,.06);font-size:29px;font-weight:750;color:#aebdca}.step.active{color:#fff;background:linear-gradient(135deg,rgba(0,169,205,.68),rgba(0,105,135,.76));box-shadow:0 0 28px rgba(0,169,205,.26)}
+.arrow{color:#5FD2E6;font-size:28px}.pip-shell{left:74px;bottom:76px;width:380px;height:690px;border:10px solid #00A9CD;border-radius:34px;box-shadow:0 24px 76px rgba(0,0,0,.55),0 0 38px rgba(0,169,205,.28);pointer-events:none;z-index:12}
+.pip{left:84px;bottom:116px;width:360px;height:640px;object-fit:cover;border-radius:25px;background:#111;z-index:11}.pip-label{position:absolute;left:0;right:0;bottom:0;height:36px;text-align:center;font-size:23px;font-weight:800;line-height:36px;color:#03131a;background:#5FD2E6}
+.focus{right:104px;top:248px;width:1240px;height:620px;border:4px solid rgba(0,169,205,.86);border-radius:24px;box-shadow:0 0 36px rgba(0,169,205,.22);pointer-events:none;z-index:8}
+.caption{right:100px;bottom:58px;width:920px;padding:20px 28px;border-left:7px solid #00A9CD;background:#031019;border-radius:0 20px 20px 0;font-size:34px;font-weight:760;z-index:10;text-shadow:0 2px 4px #000}
+</style></head><body><div id="root" data-composition-id="main" data-width="1920" data-height="1080" data-start="0" data-duration="10">
+<video id="screen-source" class="clip screen" data-start="0" data-duration="10" data-track-index="0" data-media-start="0" src="assets/screen.mp4" muted playsinline></video>
+<div id="wash" class="clip wash" data-start="0" data-duration="10" data-track-index="1"></div>
+<div id="rail" class="clip rail" data-start="0" data-duration="10" data-track-index="2">
+  <div class="step active">① 理清需求</div><div class="arrow">→</div><div class="step">② 匹配项目</div><div class="arrow">→</div><div class="step">③ 轻量改造</div>
+</div>
+<video id="person-source" class="clip pip" data-start="0" data-duration="10" data-track-index="3" data-media-start="0" src="assets/person.mp4" muted playsinline></video>
+<div id="pip" class="clip pip-shell" data-start="0" data-duration="10" data-track-index="4"><div class="pip-label" data-layout-allow-occlusion>讲解视角</div></div>
+<div id="focus" class="clip focus" data-start="0" data-duration="10" data-track-index="5"></div>
+<div id="caption" class="clip caption" data-start="4.8" data-duration="5.2" data-track-index="6">通过提问，把需求一步一步理清楚</div>
+</div><script>
+window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+tl.from("#rail",{y:-42,opacity:0,duration:.42,ease:"power3.out"},0)
+ .from("#pip",{x:-52,opacity:0,scale:.96,duration:.48,ease:"power3.out"},.08)
+ .from("#focus",{opacity:0,scale:.98,duration:.42,ease:"power3.out"},.18)
+ .from("#caption",{x:42,opacity:0,duration:.44,ease:"power3.out"},4.8);
+window.__timelines.main=tl;
+</script></body></html>
