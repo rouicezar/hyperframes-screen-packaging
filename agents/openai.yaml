@@ -1,5 +1,5 @@
 interface:
   display_name: "HyperFrames Screen Packaging"
-  short_description: "先锁定素材关系与交付映射，再完成可验证的视频包装"
+  short_description: "先锁素材关系，再以逐句语义演绎完成可验证视频包装"
   brand_color: "#00A9CD"
-  default_prompt: "Use $hyperframes-screen-packaging to validate source relationships and delivery scope first, then package every required video into its correctly mapped final output."
+  default_prompt: "Use $hyperframes-screen-packaging to validate source relationships, write and validate the sentence-level semantic storyboard, prototype the riskiest section at normal speed, then package every required video into its correctly mapped final output."

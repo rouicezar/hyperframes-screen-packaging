@@ -8,10 +8,11 @@
 4. Source analysis
 5. Choose black/blank or continuous-picture route
 6. Semantic planning
-7. Implementation
-8. Composition
-9. Self-evaluation
-10. Delivery
+7. Semantic storyboard gate
+8. Implementation
+9. Composition
+10. Self-evaluation
+11. Delivery
 
 ## 1. Project layout
 
@@ -173,7 +174,17 @@ Create a segment table with:
 
 Select the template by claim structure, not surface appearance. A list of tools converging on one model is a concept/relationship, not automatically a ranking. Dates imply a timeline. A prerequisite and later stage imply status/flow, not numerical comparison.
 
-## 7. Implementation
+For every sentence or independently meaningful clause, identify the semantic object, action, state change, and result. Classify it as batch, singleton, or transformation. Read `semantic-storytelling.md`; do not substitute repeated labels or decorative motion for enactment.
+
+## 7. Semantic storyboard gate
+
+Create `semantic-storyboard.json` and validate it with `scripts/validate_semantic_storyboard.py --stage plan`. The gate checks batch lifecycle, foreground coverage, alignment, meaningful action timing, forbidden substitutes, and review state.
+
+For long or risky sections, implement only a representative 10–15 second sample first. Include real narration and subtitles, watch at normal speed, and revise until the main composition changes with each spoken beat. Do not approve a sample from still frames or pixel-difference metrics alone.
+
+Mark reviewed beats `pass` and rerun with `--stage reviewed` before full rendering.
+
+## 8. Implementation
 
 Adapt source rather than sample video:
 
@@ -188,7 +199,7 @@ Adapt source rather than sample video:
 
 When a slot is very short, simplify content rather than accelerate an unreadable template.
 
-## 8. Composition
+## 9. Composition
 
 Compose visual inserts on the unchanged source timeline. Use frame-derived timestamps and `setpts`.
 
@@ -203,7 +214,7 @@ Rules:
 - copy audio packets when no audio edit is requested;
 - keep EDL frame counts equal to rendered slot frame counts.
 
-## 9. Self-evaluation
+## 10. Self-evaluation
 
 Review rendered output, not only slot sources:
 
@@ -214,6 +225,10 @@ Review rendered output, not only slot sources:
 - the last 2 seconds.
 - one identity frame from every bound source;
 - source-to-output count and topic consistency.
+- normal-speed sentence-level semantic changes;
+- correct accumulation and group exit for every batch;
+- effective foreground coverage for dense and sparse layouts;
+- absence of corner-only, jitter, fake-progress, and background-only activity.
 
 Look for:
 
@@ -231,7 +246,7 @@ Look for:
 
 Cap blind rerender loops. Diagnose the failure class before retrying.
 
-## 10. Delivery
+## 11. Delivery
 
 Run the delivery validator once per output and save one report per output. For `scope=full`, require source/final duration equality within one frame. Confirm all `deliver=true` sources are covered by real final files. Do not hand off a file that merely opens in a player. Require continuous decode with no errors.
 

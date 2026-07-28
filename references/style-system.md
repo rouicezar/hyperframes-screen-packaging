@@ -29,6 +29,9 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 - Keep information hierarchy to at most three levels.
 - Avoid PPT-like oversized blocks and decorative grids competing with foreground.
 - Do not let badges, checks, icons, or connectors overlap card text or borders.
+- Measure effective foreground bounds without backgrounds, grids, glows, subtitle bars, or decorative progress.
+- Dense/long compositions are left-aligned and occupy at least two thirds of usable width.
+- Sparse/short compositions are centered on both axes and occupy at least one third of usable width and height.
 
 ## Motion
 
@@ -39,6 +42,8 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 - Use non-linear easing.
 - Avoid full-frame sweep flashes and excessive simultaneous reveals.
 - Reveal independent information sequentially.
+- Prefer a decisive 0.2–0.5 second semantic action followed by a stable hold.
+- Do not use jitter, repeated pulse, corner-card re-entry, or a slow progress bar to fake activity.
 
 ## Typography
 

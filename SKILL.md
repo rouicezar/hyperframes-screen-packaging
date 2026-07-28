@@ -11,12 +11,13 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 
 1. Read `references/style-system.md`.
 2. Read `references/footage-archetypes.md`.
-3. Read `references/workflow.md`.
-4. Read `references/motion-library.md` when abstract, data, process, concept, or blank-screen packaging is needed.
-5. Read `references/boundary-and-compositing.md` before inserting full-frame or timed overlays.
-6. Read `references/subtitles.md` when subtitles exist or must be created.
-7. Read `references/failure-recovery.md` before final rendering.
-8. Inspect project-local helpers and existing `edit/` artifacts.
+3. Read `references/semantic-storytelling.md`.
+4. Read `references/workflow.md`.
+5. Read `references/motion-library.md` when abstract, data, process, concept, or blank-screen packaging is needed.
+6. Read `references/boundary-and-compositing.md` before inserting full-frame or timed overlays.
+7. Read `references/subtitles.md` when subtitles exist or must be created.
+8. Read `references/failure-recovery.md` before final rendering.
+9. Inspect project-local helpers and existing `edit/` artifacts.
 
 ## Non-negotiable contract
 
@@ -32,6 +33,11 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
   - screen recording: visible UI target, cursor, labels, and state;
   - mixed footage: protect both subject and screen evidence.
 - Make every graphic express the current spoken meaning. Decoration alone is not packaging.
+- Parse each beat into semantic object, action, state change, and readable result. Require the main composition to enact that change; text replacement or pixel motion alone does not qualify.
+- Classify beats as batch, singleton, or transformation. In a batch, reveal items one by one, retain earlier items, then exit the completed group together.
+- For dense/long content, left-align inside the safe zone and occupy at least two thirds of usable width with effective foreground content. For sparse/short content, center on both axes and occupy at least one third of usable width and height.
+- Align compact semantic actions to the spoken keyword, finish them in 0.2–0.5 seconds, and hold the readable result.
+- Reject corner-only activity, repeated microcards, jitter, decorative continuous motion, background-only motion, and progress bars unrelated to spoken progress.
 - Use HyperFrames as the primary motion engine.
 - Match suitable abstract/data/process/concept segments against the 20-template router before creating a new component. Do not force those templates onto footage where they do not fit.
 - Treat user-provided voiceover and subtitle text as authoritative.
@@ -109,6 +115,17 @@ Write `<edit>/design.md` and a segment table. For every segment record:
 
 Prefer no overlay over one that covers a face, gesture, cursor target, or proof.
 
+Write `<edit>/semantic-storyboard.json` using `references/semantic-storytelling.md`, then validate it:
+
+```bash
+python3 scripts/validate_semantic_storyboard.py \
+  <edit>/semantic-storyboard.json \
+  --stage plan \
+  --report <edit>/semantic-storyboard-validation.md
+```
+
+Stop on failure. A valid timeline with weak semantic enactment is still a failed design.
+
 Write a separate segment table for every output. Do not reuse narration, graphics, or evidence from another independent source.
 
 For continuous-picture footage, “preserve” does not mean “do nothing.” It may still use subtitles, controlled crop, color/contrast correction, sound-supported emphasis, lightweight accents, or a transition into a semantic insert.
@@ -122,6 +139,10 @@ Create isolated folders:
 ```
 
 Adapt every slot to the final canvas. Portrait layouts must be re-composed, not scaled-down landscape designs. Build independent slots in parallel when possible.
+
+For a long or risky sequence, render a representative 10–15 second sample with real narration and subtitles. Watch it at normal speed and pass the qualitative gate before continuing the full render.
+
+After review, set the reviewed beats to `normal_speed_review: "pass"` and rerun the validator with `--stage reviewed`. Do not proceed while it fails.
 
 For each HyperFrames slot run:
 
