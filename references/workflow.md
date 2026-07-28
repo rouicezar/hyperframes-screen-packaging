@@ -171,6 +171,9 @@ Create a segment table with:
 | evidence target | UI element that must remain visible |
 | safe area | Region available for packaging |
 | timing | entrance, reveal order, hold, exit |
+| spoken trigger | Exact word or short clause that starts the meaningful action |
+| container strategy | New system, retained state update, or shared batch |
+| exit mode | Transition, state replacement, group exit, hold to cut, or final hold |
 
 Select the template by claim structure, not surface appearance. A list of tools converging on one model is a concept/relationship, not automatically a ranking. Dates imply a timeline. A prerequisite and later stage imply status/flow, not numerical comparison.
 
@@ -178,7 +181,7 @@ For every sentence or independently meaningful clause, identify the semantic obj
 
 ## 7. Semantic storyboard gate
 
-Create `semantic-storyboard.json` and validate it with `scripts/validate_semantic_storyboard.py --stage plan`. The gate checks batch lifecycle, foreground coverage, alignment, meaningful action timing, forbidden substitutes, and review state.
+Create `semantic-storyboard.json` and validate it with `scripts/validate_semantic_storyboard.py --stage plan`. The gate checks batch lifecycle, foreground coverage, alignment, exact spoken triggers, component entrance timing, readable holds, container continuation, exit mode, forbidden substitutes, and review state.
 
 For long or risky sections, implement only a representative 10–15 second sample first. Include real narration and subtitles, watch at normal speed, and revise until the main composition changes with each spoken beat. Do not approve a sample from still frames or pixel-difference metrics alone.
 

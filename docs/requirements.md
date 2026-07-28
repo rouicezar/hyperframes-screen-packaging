@@ -21,3 +21,23 @@ Make spoken-video packaging behave like video storytelling rather than animated 
 - The Skill entrypoint and workflow require the semantic narrative reference and validator.
 - Valid and invalid fixtures prove the gate accepts and rejects as intended.
 - The Pi re-edit uses the revised protocol and passes both machine and visual review.
+
+## Confirmed reference-video learning requirements (2026-07-28)
+
+The user confirmed that the reusable learning target is the relationship between narration and the visual system, not the reference video's colors or literal content.
+
+Required additions:
+
+1. Every semantic beat identifies the exact spoken trigger that starts the meaningful visual action.
+2. Every beat declares component entrance duration, readable hold duration, container continuation strategy, and exit mode.
+3. Batch items share one spatial system, retain earlier items, reach a completed group state, and exit together.
+4. Repeated examples may preserve one container while replacing its internal state; rebuilding an almost identical scene for every example is discouraged.
+5. Evidence layouts bind the claim or metric to its visible source.
+6. Before/after narration must produce spatial migration or structural change, not text replacement alone.
+7. Component structure, layout, and timing may be learned from a reference; its palette must not override the project's style system.
+
+Acceptance:
+
+- The storyboard validator rejects missing or invalid narration-motion timing fields.
+- Tests cover the new fields and container/exit modes.
+- `SKILL.md`, `references/semantic-storytelling.md`, and `references/workflow.md` all require the confirmed protocol.

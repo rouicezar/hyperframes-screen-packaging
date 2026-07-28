@@ -10,3 +10,22 @@
 8. Render and inspect a representative first-segment prototype.
 9. Complete all six inserts, composite once, and validate delivery.
 10. Commit and push the Skill only after tests pass.
+
+## Confirmed reference-video learning implementation (2026-07-28)
+
+Completed:
+
+- added exact spoken triggers to the required storyboard contract;
+- separated component entrance, semantic action, and readable hold timing;
+- added `new`, `retain-update`, and `shared-batch` container strategies;
+- added transition, state replacement, group exit, hold-to-cut, and final-hold exit modes;
+- documented evidence-first, shared-baseline batch, and before/after migration layouts;
+- preserved `style-system.md` as palette authority;
+- extended the semantic storyboard validator and its pass/fail fixtures.
+
+Verification:
+
+- `python3 tests/semantic-storyboard-gate/run_tests.py` — PASS
+- `python3 tests/manifest-gate/run_tests.py` — PASS, 5/5 cases
+- Python compile check for delivery and storyboard validators — PASS
+- `git diff --check` — PASS

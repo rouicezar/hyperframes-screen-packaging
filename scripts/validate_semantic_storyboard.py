@@ -8,6 +8,14 @@ from pathlib import Path
 
 VALID_MODES = {"batch", "singleton", "transformation"}
 VALID_DENSITIES = {"dense", "sparse"}
+VALID_CONTAINER_STRATEGIES = {"new", "retain-update", "shared-batch"}
+VALID_EXIT_MODES = {
+    "transition",
+    "state-replace",
+    "group-exit",
+    "hold-to-cut",
+    "none-final",
+}
 FORBIDDEN_PRIMARY = {
     "corner-status-card",
     "corner-microcard",
@@ -87,6 +95,7 @@ def main() -> None:
 
         for key in (
             "spoken_text",
+            "spoken_trigger",
             "semantic_object",
             "semantic_action",
             "state_change",
@@ -164,9 +173,40 @@ def main() -> None:
         action_seconds = beat.get("core_action_seconds")
         if not isinstance(action_seconds, (int, float)) or not 0.2 <= action_seconds <= 0.5:
             errors.append(f"{prefix}.core_action_seconds must be between 0.2 and 0.5")
+        entry_seconds = beat.get("component_entry_seconds")
+        if not isinstance(entry_seconds, (int, float)) or not 0.2 <= entry_seconds <= 0.55:
+            errors.append(
+                f"{prefix}.component_entry_seconds must be between 0.2 and 0.55"
+            )
         hold_seconds = beat.get("stable_hold_seconds")
-        if not isinstance(hold_seconds, (int, float)) or hold_seconds <= 0:
-            errors.append(f"{prefix}.stable_hold_seconds must be positive")
+        if not isinstance(hold_seconds, (int, float)) or hold_seconds < 0.4:
+            errors.append(f"{prefix}.stable_hold_seconds must be at least 0.4")
+
+        container_strategy = beat.get("container_strategy")
+        if container_strategy not in VALID_CONTAINER_STRATEGIES:
+            errors.append(
+                f"{prefix}.container_strategy must be one of "
+                f"{sorted(VALID_CONTAINER_STRATEGIES)}"
+            )
+        if mode == "batch" and container_strategy != "shared-batch":
+            errors.append(f"{prefix}: batch mode must use shared-batch container_strategy")
+        if mode != "batch" and container_strategy == "shared-batch":
+            errors.append(
+                f"{prefix}: shared-batch container_strategy is only valid in batch mode"
+            )
+
+        exit_mode = beat.get("exit_mode")
+        if exit_mode not in VALID_EXIT_MODES:
+            errors.append(f"{prefix}.exit_mode must be one of {sorted(VALID_EXIT_MODES)}")
+        if mode == "batch" and exit_mode != "group-exit":
+            errors.append(f"{prefix}: batch mode must use group-exit exit_mode")
+        if mode != "batch" and exit_mode == "group-exit":
+            errors.append(f"{prefix}: group-exit exit_mode is only valid in batch mode")
+        if exit_mode == "state-replace" and container_strategy != "retain-update":
+            errors.append(
+                f"{prefix}: state-replace exit_mode requires retain-update "
+                "container_strategy"
+            )
 
         review = beat.get("normal_speed_review")
         if args.stage == "reviewed" and review != "pass":

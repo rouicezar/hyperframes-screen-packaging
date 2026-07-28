@@ -34,9 +34,12 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
   - mixed footage: protect both subject and screen evidence.
 - Make every graphic express the current spoken meaning. Decoration alone is not packaging.
 - Parse each beat into semantic object, action, state change, and readable result. Require the main composition to enact that change; text replacement or pixel motion alone does not qualify.
+- Bind every meaningful action to an exact spoken trigger. Declare the component entrance, readable hold, container continuation, and exit mode before implementation.
 - Classify beats as batch, singleton, or transformation. In a batch, reveal items one by one, retain earlier items, then exit the completed group together.
 - For dense/long content, left-align inside the safe zone and occupy at least two thirds of usable width with effective foreground content. For sparse/short content, center on both axes and occupy at least one third of usable width and height.
 - Align compact semantic actions to the spoken keyword, finish them in 0.2–0.5 seconds, and hold the readable result.
+- Preserve a stable component system across related clauses. Prefer updating the container's state over rebuilding an almost identical scene, and reserve hard cuts for genuine narrative-world changes.
+- Learn component structure, layout, motion, and narration timing from approved references without importing their palette; `references/style-system.md` remains the color authority.
 - Reject corner-only activity, repeated microcards, jitter, decorative continuous motion, background-only motion, and progress bars unrelated to spoken progress.
 - Use HyperFrames as the primary motion engine.
 - Match suitable abstract/data/process/concept segments against the 20-template router before creating a new component. Do not force those templates onto footage where they do not fit.
@@ -111,6 +114,7 @@ Write `<edit>/design.md` and a segment table. For every segment record:
 - component/template and semantic reason;
 - subject/evidence safe area;
 - entrance, reveal, hold, and exit timing;
+- exact spoken trigger, component entrance duration, container strategy, and exit mode;
 - subtitle zone.
 
 Prefer no overlay over one that covers a face, gesture, cursor target, or proof.

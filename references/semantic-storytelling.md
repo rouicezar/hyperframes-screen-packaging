@@ -93,6 +93,52 @@ fast meaningful change → stable readable result → next semantic change
 
 One sentence normally requires one meaningful change in the main composition. Several short clauses may share a scene when each clause visibly updates the same semantic system.
 
+### 5.1 Bind motion to the spoken trigger
+
+For every beat, quote the exact word or short clause that triggers the meaningful action. Do not use the subtitle cue start by default when the actionable word occurs later.
+
+Separate three timings:
+
+1. `component_entry_seconds` establishes the component's structure;
+2. `core_action_seconds` enacts the spoken meaning;
+3. `stable_hold_seconds` preserves the readable result.
+
+Typical narration-driven ranges:
+
+- structural component entrance: `0.25–0.55s`;
+- one card or node joining a batch: `0.20–0.35s`;
+- internal state replacement in a retained container: `0.20–0.30s`;
+- readable completed state: normally at least `0.60s`, unless the real narration interval is shorter and the design is simplified.
+
+Start the action at, or just after, the spoken trigger. Never reveal the result before narration introduces it.
+
+### 5.2 Continue the component system across clauses
+
+Choose one `container_strategy`:
+
+- `new`: this beat establishes a genuinely new visual system;
+- `retain-update`: keep the existing container/layout and change its meaningful internal state;
+- `shared-batch`: add the current item to a shared spatial system while retaining earlier items.
+
+Choose one `exit_mode`:
+
+- `transition`: the component exits through a designed transition into a new visual system;
+- `state-replace`: the container remains and only its meaningful state changes;
+- `group-exit`: a completed batch exits as one group;
+- `hold-to-cut`: preserve the readable result until a justified hard cut;
+- `none-final`: the final frame remains visible through the output end.
+
+Hard cuts are for genuine narrative-world changes such as problem → person, person → evidence, or explanation → action. Related examples and steps should normally use `retain-update` or `shared-batch`.
+
+### 5.3 Use stable layout systems
+
+- Evidence occupies the main field; its metric or interpretation is secondary and visibly attached to the source.
+- Batch cards use equal dimensions, equal spacing, and a shared baseline or container.
+- Before/after narration uses two stable panels plus a visible migration path; text replacement alone is insufficient.
+- Keep top metadata, the central semantic field, and the subtitle zone separate.
+- Give each scene one primary visual subject.
+- An approved reference may inform component structure, layout, entry, hold, exit, and narration timing, but it does not override the project palette in `style-system.md`.
+
 ## 6. Forbidden substitutes
 
 Reject the design when any of these is used to simulate narrative activity:
@@ -119,6 +165,7 @@ Write `<edit>/semantic-storyboard.json`. Every beat must include:
 - `density`, `alignment`;
 - `effective_bounds` measured relative to the usable safe zone;
 - `primary_visual`, `core_action_seconds`, `stable_hold_seconds`;
+- `spoken_trigger`, `component_entry_seconds`, `container_strategy`, `exit_mode`;
 - `visual_translation`, `forbidden_substitute`;
 - `main_composition_changes`;
 - `normal_speed_review`.
