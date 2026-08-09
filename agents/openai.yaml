@@ -2,4 +2,4 @@ interface:
   display_name: "HyperFrames Screen Packaging"
   short_description: "先锁素材关系，再以逐句语义演绎完成可验证视频包装"
   brand_color: "#00A9CD"
-  default_prompt: "Use $hyperframes-screen-packaging to validate source relationships, write and validate the sentence-level semantic storyboard, prototype the riskiest section at normal speed, then package every required video into its correctly mapped final output."
+  default_prompt: "Use $hyperframes-screen-packaging from the project AGENTS.md. Rebuild context from target edit artifacts, validate source mapping and the portable quality contract, preserve authoritative wording and user timing overrides, prohibit unnecessary line breaks and center blobs, prototype with real audio/subtitles at normal speed, then require machine plus visual evidence before promoting each final output."

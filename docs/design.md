@@ -54,3 +54,21 @@ Layout and narrative patterns:
 - before/after claims reserve a visible migration path between stable panels;
 - one scene has one primary visual subject;
 - top metadata, central semantic field, and subtitle zone remain separate layers.
+
+## Cross-conversation stability calibration design (2026-08-09)
+
+### Portable quality contract
+
+Each output owns `edit/quality-contract.json`. It records source/manifest binding, subtitle and boundary authority, explicit user overrides, layout invariants, prototype evidence, and final visual evidence. `scripts/validate_quality_contract.py` exposes three gates:
+
+- `plan`: authority and layout invariants are explicit;
+- `prototype`: real audio/subtitles and normal-speed review are complete, or a low-risk waiver has a reason;
+- `final`: boundary/hero evidence exists and visual, subtitle, and layout reviews are all `pass`.
+
+### EDL strengthening
+
+Every overlay uses integer `start_frame` and `end_frame` as canonical half-open bounds. Optional seconds must equal frames divided by FPS within a small tolerance. Intervals cannot overlap. A `deliberate-full-frame-replacement` over visible footage requires `user_authorized=true`, `boundary_source=subtitle-authoritative`, and a non-empty authorization note.
+
+### Release parity
+
+The Git source is developed and tested first. Only after all gates pass is the same distributable tree installed at `/Users/rouice/.codex/skills/hyperframes-screen-packaging`. A recursive comparison of `SKILL.md`, `agents`, `assets`, `references`, `scripts`, and `tests` is the release gate.

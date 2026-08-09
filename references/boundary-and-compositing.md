@@ -9,6 +9,8 @@
 
 Never reverse this order.
 
+Exception: an explicit user instruction to replace the interval identified by supplied subtitle wording is authoritative for that interval even if pixels are not black. Record `coverage_mode=deliberate-full-frame-replacement`, `boundary_source=subtitle-authoritative`, `user_authorized=true`, and the exact authorization note. Do not generalize the exception.
+
 ## Half-open frame intervals
 
 Represent every insert as `[start_frame, end_frame)`.
@@ -22,6 +24,8 @@ frame_count = end_frame - start_frame
 ```
 
 Render exactly `frame_count` frames. Do not round an end time upward and create one extra frame.
+
+For subtitle timestamps on constant-frame-rate footage, map both bounds with `ceil(seconds * fps - epsilon)` and store the resulting integers. EDL seconds, when present, must equal frames divided by FPS. EDL intervals must not overlap.
 
 ## Boundary verification
 

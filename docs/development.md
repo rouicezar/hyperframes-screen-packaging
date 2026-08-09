@@ -29,3 +29,14 @@ Verification:
 - `python3 tests/manifest-gate/run_tests.py` — PASS, 5/5 cases
 - Python compile check for delivery and storyboard validators — PASS
 - `git diff --check` — PASS
+
+## Cross-conversation stability calibration implementation (2026-08-09)
+
+Planned sequence:
+
+1. Audit Git source, installed copy, approved-output evidence, and conflicting guidance.
+2. Add the portable quality contract, validator, fixtures, and calibration reference.
+3. Strengthen delivery EDL checks and align all documentation and component guidance.
+4. Run unit gates, Python compilation, Skill quick validation, and a real-artifact forward test.
+5. Install the tested distributable tree and prove source/install parity.
+6. Commit and push only after every release gate passes.

@@ -18,6 +18,7 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 7. Read `references/subtitles.md` when subtitles exist or must be created.
 8. Read `references/failure-recovery.md` before final rendering.
 9. Inspect project-local helpers and existing `edit/` artifacts.
+10. Read `references/quality-calibration.md` to reproduce approved quality without chat history.
 
 ## Non-negotiable contract
 
@@ -52,6 +53,8 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 - Apply subtitles after every visual overlay.
 - Permit only one encoder process per output path. Render to a unique temporary filename, validate it, then replace the final path.
 - Do not claim completion until continuous decode, representative frames, boundaries, actual-pixel layout, subtitle placement, and audio integrity pass.
+- Create `edit/quality-contract.json` for every output and pass its plan, prototype, and final gates. A new conversation must rely on this artifact, not prior chat context.
+- Keep complete short titles, process steps, and information points on one line when measured space permits. Do not create unnecessary forced wraps or a compact center blob on a wide canvas.
 
 ## Stage gates
 
@@ -104,6 +107,8 @@ Write `<edit>/requirements.md` before implementation:
 - allowed coverage tolerance;
 - brand and output requirements.
 
+Create `<edit>/quality-contract.json` from `references/quality-calibration.md` and pass `scripts/validate_quality_contract.py --stage plan` before implementation.
+
 ### 3. Design
 
 Write `<edit>/design.md` and a segment table. For every segment record:
@@ -148,6 +153,8 @@ For a long or risky sequence, render a representative 10–15 second sample with
 
 After review, set the reviewed beats to `normal_speed_review: "pass"` and rerun the validator with `--stage reviewed`. Do not proceed while it fails.
 
+Also pass `scripts/validate_quality_contract.py <edit>/quality-contract.json --stage prototype`. This proves the sample used real audio, authoritative subtitles, and normal-speed review.
+
 For each HyperFrames slot run:
 
 ```bash
@@ -178,6 +185,8 @@ python3 scripts/validate_delivery.py \
 ```
 
 Inspect opening, ending, every transition/boundary, each hero frame, and subject/evidence safety. Rename to `<edit>/final.mp4` only after validation passes.
+
+Extract boundary and hero-frame evidence from the composed output, record separate visual/subtitle/layout review results, and pass `scripts/validate_quality_contract.py <edit>/quality-contract.json --stage final`. Both delivery validation and this final quality gate must pass before promotion to `final.mp4`.
 
 For every output, verify:
 

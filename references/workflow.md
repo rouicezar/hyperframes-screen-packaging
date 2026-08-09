@@ -29,6 +29,7 @@ Keep source files untouched. Place all generated work inside the video's `edit/`
     ├── input-manifest.json
     ├── input-manifest-validation.md
     ├── source-inspection.json
+    ├── quality-contract.json
     ├── edl.json
     ├── compose-filter.txt
     ├── animations/slot_<id>/
@@ -133,6 +134,8 @@ slot_frames = end_frame - start_frame
 
 Use a half-open interval `[start_frame, end_frame)`.
 
+If the user explicitly requires replacement at supplied subtitle wording even when the picture is not black, that local instruction overrides pixel-black detection. Record the exact wording and authorization in the quality contract and EDL; pixels remain authoritative everywhere else.
+
 ## 5. Choose the route
 
 ### Black/blank route
@@ -158,6 +161,8 @@ Create a coverage map:
 No black frames does not mean no packaging. It means packaging must be evidence-aware rather than boundary-driven.
 
 ## 6. Semantic planning
+
+Before semantic implementation, create and pass `quality-contract.json --stage plan`. This records durable user overrides, subtitle/boundary authority, the single-line/no-forced-wrap rule, and the no-center-blob layout gate.
 
 Create a segment table with:
 
@@ -186,6 +191,8 @@ Create `semantic-storyboard.json` and validate it with `scripts/validate_semanti
 For long or risky sections, implement only a representative 10–15 second sample first. Include real narration and subtitles, watch at normal speed, and revise until the main composition changes with each spoken beat. Do not approve a sample from still frames or pixel-difference metrics alone.
 
 Mark reviewed beats `pass` and rerun with `--stage reviewed` before full rendering.
+
+Pass `validate_quality_contract.py --stage prototype` before full rendering. A contact sheet alone cannot satisfy this gate.
 
 ## 8. Implementation
 
@@ -216,6 +223,9 @@ Rules:
 - place subtitles last;
 - copy audio packets when no audio edit is requested;
 - keep EDL frame counts equal to rendered slot frame counts.
+- use integer `start_frame` and `end_frame` as canonical bounds; seconds are derived metadata and must agree with them;
+- prevent overlapping EDL intervals;
+- mark user-authorized replacement over visible footage as `deliberate-full-frame-replacement` with its authorization note and subtitle-authoritative boundary source.
 
 ## 10. Self-evaluation
 
@@ -254,3 +264,5 @@ Cap blind rerender loops. Diagnose the failure class before retrying.
 Run the delivery validator once per output and save one report per output. For `scope=full`, require source/final duration equality within one frame. Confirm all `deliver=true` sources are covered by real final files. Do not hand off a file that merely opens in a player. Require continuous decode with no errors.
 
 Update `project.md`. If the folder is not a Git repository, state that commit and push are unavailable instead of pretending they were completed.
+
+Before promoting the temporary final, extract boundary and hero evidence, record separate visual/subtitle/layout review results, and pass `quality-contract.json --stage final` as well as delivery validation.

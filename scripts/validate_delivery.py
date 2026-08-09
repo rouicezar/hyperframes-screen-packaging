@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 from fractions import Fraction
 from pathlib import Path
@@ -75,20 +76,50 @@ def main() -> None:
     edl_notes = []
     if args.edl:
         edl = json.loads(args.edl.read_text(encoding="utf-8"))
-        for overlay in edl.get("overlays", []):
-            start = float(overlay["start"])
-            end = float(overlay["end"])
-            frames = round(end * fps) - round(start * fps)
+        overlays = edl.get("overlays", [])
+        canonical: list[tuple[int, int, str]] = []
+        for overlay in overlays:
+            overlay_id = str(overlay.get("id", "?"))
+            try:
+                start_frame = int(overlay["start_frame"])
+                end_frame = int(overlay["end_frame"])
+            except (KeyError, TypeError, ValueError):
+                checks.append((f"slot {overlay_id} integer bounds", False, "start_frame and end_frame are required integers"))
+                continue
+            bounds_ok = start_frame >= 0 and end_frame > start_frame
+            checks.append((f"slot {overlay_id} integer bounds", bounds_ok, f"[{start_frame}, {end_frame})"))
+            if not bounds_ok:
+                continue
+            canonical.append((start_frame, end_frame, overlay_id))
+            start = start_frame / fps
+            end = end_frame / fps
+            frames = end_frame - start_frame
+            for key, expected in (("start", start), ("end", end)):
+                if key in overlay:
+                    actual = float(overlay[key])
+                    checks.append((f"slot {overlay_id} {key}/frame agreement", math.isclose(actual, expected, abs_tol=0.0005), f"seconds={actual:.6f}, frames={expected:.6f}"))
+            if overlay.get("coverage_mode") == "deliberate-full-frame-replacement":
+                authorized = (
+                    overlay.get("user_authorized") is True
+                    and overlay.get("boundary_source") == "subtitle-authoritative"
+                    and isinstance(overlay.get("authorization_note"), str)
+                    and bool(overlay["authorization_note"].strip())
+                )
+                checks.append((f"slot {overlay_id} replacement authorization", authorized, "explicit user authority and subtitle boundary required"))
             file_value = overlay.get("file")
-            note = f"{overlay.get('id', '?')}: [{start:.6f}, {end:.6f}) = {frames} frames"
+            note = f"{overlay_id}: frames [{start_frame}, {end_frame}) / seconds [{start:.6f}, {end:.6f}) = {frames} frames"
             if file_value:
                 slot_path = (args.edl.parent / file_value).resolve()
                 if slot_path.exists():
                     slot_duration = float(probe(slot_path)["format"]["duration"])
                     slot_frames = round(slot_duration * fps)
                     ok = slot_frames == frames
-                    checks.append((f"slot {overlay.get('id', '?')} frame count", ok, f"EDL={frames}, render={slot_frames}"))
+                    checks.append((f"slot {overlay_id} frame count", ok, f"EDL={frames}, render={slot_frames}"))
             edl_notes.append(note)
+        canonical.sort()
+        for previous, current in zip(canonical, canonical[1:]):
+            overlap_ok = current[0] >= previous[1]
+            checks.append((f"EDL overlap {previous[2]} -> {current[2]}", overlap_ok, f"previous_end={previous[1]}, current_start={current[0]}"))
 
     passed = all(ok for _, ok, _ in checks)
     lines = [

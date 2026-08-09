@@ -1,4 +1,4 @@
-# Palmier Tech Screen Packaging Component Library
+# HyperFrames Screen Packaging Component Library
 
 ## Style Prompt
 
@@ -51,7 +51,7 @@ Rules:
 - Subtitle text floats on the black strip, centered horizontally, with `#00a9cd` text color and a subtle glow/shadow.
 - Subtitle text must stay on one line. Do not wrap or insert forced line breaks.
 - Subtitle segmentation is semantic: keep each complete spoken sentence or complete thought together. Do not split one semantic sentence into two subtitle placements.
-- If a sentence is too long for one line, first rewrite/compress the subtitle while preserving meaning. If it still cannot fit, split only at a natural semantic boundary into separate timed captions.
+- If authoritative text is too long, reduce font size or recompose first. Ask before rewriting it; never silently compress user-provided wording.
 
 ## Motion
 

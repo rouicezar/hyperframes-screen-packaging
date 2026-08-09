@@ -41,3 +41,24 @@ Acceptance:
 - The storyboard validator rejects missing or invalid narration-motion timing fields.
 - Tests cover the new fields and container/exit modes.
 - `SKILL.md`, `references/semantic-storytelling.md`, and `references/workflow.md` all require the confirmed protocol.
+
+## Cross-conversation stability calibration requirements (2026-08-09)
+
+Goal: a fresh conversation working under `/Users/rouice/Vibecoding视频` must reproduce the approved packaging quality without relying on hidden chat history.
+
+Required additions:
+
+1. The installed Skill and the Git source must expose the same tested production files; source/install drift is a release failure.
+2. Every project must create `edit/quality-contract.json` before implementation and validate it at plan, prototype, and final stages.
+3. The contract must preserve authoritative subtitle/voiceover text, explicit user timing overrides, frame-boundary authority, single-line information points, and the ban on unnecessary forced wrapping or compact center blobs.
+4. User-authorized subtitle ranges may deliberately replace non-black footage, but the EDL must record the authorization, subtitle authority, and integer half-open frame range.
+5. Long or high-risk work must include a real-audio, real-subtitle prototype watched at normal speed.
+6. Final acceptance must include existing boundary and hero-frame evidence plus explicit visual, subtitle, and layout review passes.
+7. Machine validation is necessary but never substitutes for actual-pixel and normal-speed review.
+
+Acceptance:
+
+- A portable quality-contract validator rejects missing authority, forbidden line-break/layout choices, unreviewed prototypes, and absent final evidence.
+- Delivery validation rejects overlapping EDL ranges, time/frame disagreement, and unauthorized deliberate full-frame replacement.
+- Skill entrypoint, workflow, boundary, subtitle, style, and component-library guidance agree on the same rules.
+- Repository tests, Skill quick validation, a real-artifact forward test, install-source parity, commit, and push all pass.

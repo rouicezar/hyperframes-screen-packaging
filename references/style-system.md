@@ -32,6 +32,7 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 - Measure effective foreground bounds without backgrounds, grids, glows, subtitle bars, or decorative progress.
 - Dense/long compositions are left-aligned and occupy at least two thirds of usable width.
 - Sparse/short compositions are centered on both axes and occupy at least one third of usable width and height.
+- A wide canvas must not collapse a complete process into a compact center blob. When a short multi-step process fits horizontally, run it in one row and use the safe width.
 
 ## Motion
 
@@ -49,7 +50,8 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 
 - Prefer PingFang SC, Hiragino Sans GB, or another reliable CJK font.
 - Keep one information point on one line when possible.
-- Reduce wording or recompose before allowing awkward wraps.
+- Keep one complete information point on one line when measured space permits; never add a forced break for symmetry.
+- For user-provided subtitles, reduce type size or recompose first and ask before changing wording.
 - Test long subtitles and mixed Chinese/English strings on the final canvas.
 
 ## Anti-patterns
