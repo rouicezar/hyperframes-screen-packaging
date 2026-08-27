@@ -17,6 +17,9 @@ This file turns approved production quality into portable rules. Do not depend o
 - Keep one information point on one line whenever it fits. Never add a forced line break merely for visual symmetry.
 - A horizontal multi-step process runs across one row when it fits. Wrap only when measured bounds prove a single row unreadable; record that decision.
 - Related clauses retain and update one component system. Batch items accumulate and exit together.
+- Equal semantic peers use equal geometry and a shared baseline or deliberate symmetry; the completed group is optically balanced around the safe-zone center.
+- Connectors are relationship evidence, not decoration. They close on actual rendered borders, use consistent branch grammar, and never imply an undeclared hierarchy.
+- State transitions remove every undeclared prior-stage element. A stale rail or arrow is a final-review failure even when layout inspection reports no overflow.
 - Every meaningful entrance/action completes quickly, then holds long enough to read. Do not fill time with decorative motion.
 
 ## Timing and replacement authority
@@ -32,5 +35,6 @@ This file turns approved production quality into portable rules. Do not depend o
 - Final review requires boundary and hero-frame evidence extracted from the composed output.
 - Contact sheets support review but do not replace watching motion at normal speed.
 - Machine PASS and visual PASS are separate. `final.mp4` is promoted only after both pass.
+- Final visual evidence separately records peer balance, connector closure, and stale-element removal as `pass`.
 
 Create and validate `edit/quality-contract.json` at every stage. The contract is the portable record that a new conversation must obey.

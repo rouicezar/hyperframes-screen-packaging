@@ -134,6 +134,9 @@ Hard cuts are for genuine narrative-world changes such as problem → person, pe
 
 - Evidence occupies the main field; its metric or interpretation is secondary and visibly attached to the source.
 - Batch cards use equal dimensions, equal spacing, and a shared baseline or container.
+- Peer nodes must read as peers: their geometry and connector branches are symmetric or optically balanced around the group's center. Connector topology must not invent a parent/child hierarchy absent from the narration.
+- Derive connector endpoints from actual component bounds and verify clean border-to-border closure on rendered frames.
+- When a retained container changes state, explicitly declare which rails, arrows, labels, and connectors persist. Everything else exits before the new state becomes readable.
 - Before/after narration uses two stable panels plus a visible migration path; text replacement alone is insufficient.
 - Keep top metadata, the central semantic field, and the subtitle zone separate.
 - Give each scene one primary visual subject.

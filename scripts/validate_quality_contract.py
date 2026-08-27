@@ -39,7 +39,16 @@ def main() -> None:
         errors.append("dense_min_width_ratio must be at least 0.667")
     if float(layout.get("sparse_min_width_ratio", 0)) < 0.333 or float(layout.get("sparse_min_height_ratio", 0)) < 0.333:
         errors.append("sparse minimum width and height ratios must be at least 0.333")
-    for field in ("single_line_information_points", "no_unnecessary_forced_breaks", "no_center_blob", "actual_pixel_review_required"):
+    for field in (
+        "single_line_information_points",
+        "no_unnecessary_forced_breaks",
+        "no_center_blob",
+        "actual_pixel_review_required",
+        "peer_components_balanced",
+        "equal_peer_geometry",
+        "connector_closure_required",
+        "stale_elements_must_exit",
+    ):
         if layout.get(field) is not True:
             errors.append(f"layout.{field} must be true")
 
@@ -73,7 +82,14 @@ def main() -> None:
             evidence = resolve(base, review.get(field))
             if evidence is None or not evidence.exists():
                 errors.append(f"final_review.{field} must exist")
-        for field in ("visual_review", "subtitle_review", "layout_review"):
+        for field in (
+            "visual_review",
+            "subtitle_review",
+            "layout_review",
+            "balance_review",
+            "connector_review",
+            "stale_element_review",
+        ):
             if review.get(field) != PASS:
                 errors.append(f"final_review.{field} must be pass")
 

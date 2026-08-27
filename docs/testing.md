@@ -31,3 +31,12 @@ Baseline: `/Users/rouice/Vibecoding视频/让codex指挥KIMI code做一个我的
 - Source/install comparison for `SKILL.md`, `agents`, `assets`, `references`, `scripts`, and `tests`: PASS; the installed tests directory contains only one extra inert `.DS_Store`.
 - Installed manifest, semantic-storyboard, and quality-contract gates: PASS.
 - Installed Skill quick validation: PASS.
+
+## Peer-layout and connector topology regression (2026-08-27)
+
+- Input manifest fixtures: PASS, 5/5.
+- Semantic storyboard fixtures: PASS.
+- Quality-contract fixtures: PASS, including expected rejection of missing peer balance, connector closure, and final topology-review passes.
+- Python compilation: PASS.
+- Skill quick validation with isolated PyYAML: PASS.
+- `git diff --check`: PASS.

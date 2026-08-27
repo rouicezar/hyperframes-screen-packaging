@@ -180,6 +180,8 @@ Create a segment table with:
 | container strategy | New system, retained state update, or shared batch |
 | exit mode | Transition, state replacement, group exit, hold to cut, or final hold |
 
+For any scene with three or more related components, also record the peer layout system, group center, equal-size/alignment rule, connector topology, and which previous-state elements persist or exit.
+
 Select the template by claim structure, not surface appearance. A list of tools converging on one model is a concept/relationship, not automatically a ranking. Dates imply a timeline. A prerequisite and later stage imply status/flow, not numerical comparison.
 
 For every sentence or independently meaningful clause, identify the semantic object, action, state change, and result. Classify it as batch, singleton, or transformation. Read `semantic-storytelling.md`; do not substitute repeated labels or decorative motion for enactment.
@@ -242,6 +244,9 @@ Review rendered output, not only slot sources:
 - correct accumulation and group exit for every batch;
 - effective foreground coverage for dense and sparse layouts;
 - absence of corner-only, jitter, fake-progress, and background-only activity.
+- peer components use deliberate visual balance, equal geometry where semantically equal, and a stable shared baseline or symmetric system;
+- every relationship connector closes border-to-border with one consistent topology and no false hierarchy;
+- no undeclared arrow, rail, label, connector, or other element survives from the preceding state.
 
 Look for:
 

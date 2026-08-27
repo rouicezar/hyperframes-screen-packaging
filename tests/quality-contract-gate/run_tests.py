@@ -35,6 +35,10 @@ valid = {
         "no_unnecessary_forced_breaks": True,
         "no_center_blob": True,
         "actual_pixel_review_required": True,
+        "peer_components_balanced": True,
+        "equal_peer_geometry": True,
+        "connector_closure_required": True,
+        "stale_elements_must_exit": True,
     },
     "prototype": {
         "required": True,
@@ -49,6 +53,9 @@ valid = {
         "visual_review": "pass",
         "subtitle_review": "pass",
         "layout_review": "pass",
+        "balance_review": "pass",
+        "connector_review": "pass",
+        "stale_element_review": "pass",
     },
 }
 
@@ -64,6 +71,23 @@ invalid["final_review"]["layout_review"] = "pending"
 result = run(invalid, "final")
 assert result.returncode != 0
 for expected in ("no_unnecessary_forced_breaks", "no_center_blob", "normal_speed_review", "layout_review"):
+    assert expected in result.stdout, result.stdout
+
+invalid_topology = json.loads(json.dumps(valid))
+invalid_topology["layout"]["peer_components_balanced"] = False
+invalid_topology["layout"]["connector_closure_required"] = False
+invalid_topology["final_review"]["balance_review"] = "pending"
+invalid_topology["final_review"]["connector_review"] = "pending"
+invalid_topology["final_review"]["stale_element_review"] = "pending"
+result = run(invalid_topology, "final")
+assert result.returncode != 0
+for expected in (
+    "peer_components_balanced",
+    "connector_closure_required",
+    "balance_review",
+    "connector_review",
+    "stale_element_review",
+):
     assert expected in result.stdout, result.stdout
 
 print("quality-contract-gate: PASS")

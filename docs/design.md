@@ -72,3 +72,16 @@ Every overlay uses integer `start_frame` and `end_frame` as canonical half-open 
 ### Release parity
 
 The Git source is developed and tested first. Only after all gates pass is the same distributable tree installed at `/Users/rouice/.codex/skills/hyperframes-screen-packaging`. A recursive comparison of `SKILL.md`, `agents`, `assets`, `references`, `scripts`, and `tests` is the release gate.
+
+## Peer-layout and connector topology design (2026-08-27)
+
+Add portable layout invariants to `quality-contract.json`:
+
+- `peer_components_balanced`: peer nodes must share a deliberate geometric system;
+- `equal_peer_geometry`: equal semantic peers use equal dimensions and consistent alignment/spacing;
+- `connector_closure_required`: connectors terminate on actual rendered component boundaries;
+- `stale_elements_must_exit`: a state transition removes undeclared elements from the previous state.
+
+At final stage require independent `pass` values for `balance_review`, `connector_review`, and `stale_element_review`. These are human/actual-pixel gates because a generic DOM overlap scan cannot infer relationship topology or optical balance. HyperFrames layout inspection remains necessary but is not sufficient.
+
+Preferred three-peer pattern on a wide canvas: one centered parent above three equal peer cards on one baseline, connected by one shared horizontal bus and equal vertical branches. Alternative layouts are allowed only when their semantic hierarchy and optical balance are explicit.

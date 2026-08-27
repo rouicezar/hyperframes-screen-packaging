@@ -33,6 +33,11 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 - Dense/long compositions are left-aligned and occupy at least two thirds of usable width.
 - Sparse/short compositions are centered on both axes and occupy at least one third of usable width and height.
 - A wide canvas must not collapse a complete process into a compact center blob. When a short multi-step process fits horizontally, run it in one row and use the safe width.
+- Equal semantic peers use equal component dimensions, a shared baseline or a deliberately symmetric radial layout, and optically equal spacing.
+- Balance the completed peer group around the safe-zone geometric axis. A single peer must not fall onto a separate row unless the spoken meaning establishes that hierarchy.
+- Compute connectors from actual rendered component bounds. Each line must touch the source and target borders cleanly without a gap, overlap into the border, or pass through a component.
+- Use one connector grammar per relationship system: for example, one centered parent, one shared bus, and equal branches to peer children.
+- On a state change, hide or remove every element that is not explicitly retained. A previous-stage arrow, rail, label, or glow may not remain behind the next composition.
 
 ## Motion
 
@@ -62,3 +67,4 @@ The cyan system is a brand layer, not a demand for a dark full-frame card on eve
 - Leaving an overlay after the scene, crop, subject, or UI state changes.
 - Using orange remnants in light, shadow, gradients, or glow.
 - Trusting code coordinates without checking output frames.
+- Passing a no-overflow check while peer balance, connector closure, or stale-element cleanup is visibly wrong.

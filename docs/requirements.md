@@ -62,3 +62,22 @@ Acceptance:
 - Delivery validation rejects overlapping EDL ranges, time/frame disagreement, and unauthorized deliberate full-frame replacement.
 - Skill entrypoint, workflow, boundary, subtitle, style, and component-library guidance agree on the same rules.
 - Repository tests, Skill quick validation, a real-artifact forward test, install-source parity, commit, and push all pass.
+
+## Peer-layout and connector topology requirements (2026-08-27)
+
+Observed failure: three peer platform cards were placed on different axes around one method card; connector segments were positioned independently, leaving gaps or inconsistent closure; a previous-stage arrow remained visible behind the new scene.
+
+Required additions:
+
+1. Peer components in one semantic group use equal dimensions, a shared baseline or a deliberately symmetric radial system, and optically equal spacing.
+2. The completed group balances around the canvas or safe-zone geometric axis; visual weight may not drift because one peer is placed on a separate row without semantic reason.
+3. Every connector starts and ends on the actual rendered boundary of its source and target. Gaps, border overlap, line penetration, and mixed closure grammar reject the scene.
+4. Connectors express the declared relationship consistently. Peer relationships may use a shared bus or equal branches; they may not imply a false hierarchy.
+5. Elements from the preceding state must exit when the new state begins unless the storyboard explicitly retains and reuses them.
+6. Final quality validation separately records peer balance, connector closure, and stale-element review.
+
+Acceptance:
+
+- The quality-contract validator rejects contracts that omit topology invariants or final topology review passes.
+- Style, semantic, workflow, and calibration references describe the same rule.
+- Regression fixtures prove valid contracts pass and the three failure classes block release.

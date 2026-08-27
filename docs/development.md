@@ -40,3 +40,10 @@ Planned sequence:
 4. Run unit gates, Python compilation, Skill quick validation, and a real-artifact forward test.
 5. Install the tested distributable tree and prove source/install parity.
 6. Commit and push only after every release gate passes.
+
+## Peer-layout and connector topology implementation (2026-08-27)
+
+1. Add balance, equal-peer geometry, connector closure, and stale-element exit rules to the Skill contract and references.
+2. Extend `validate_quality_contract.py` with plan-stage topology declarations and final-stage topology review passes.
+3. Extend quality-contract regression fixtures with missing/failed topology cases.
+4. Run all repository tests, Python compilation, Skill quick validation, diff checks, source/runtime parity, then commit and push.

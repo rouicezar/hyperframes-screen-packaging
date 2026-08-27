@@ -40,6 +40,8 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 - For dense/long content, left-align inside the safe zone and occupy at least two thirds of usable width with effective foreground content. For sparse/short content, center on both axes and occupy at least one third of usable width and height.
 - Align compact semantic actions to the spoken keyword, finish them in 0.2–0.5 seconds, and hold the readable result.
 - Preserve a stable component system across related clauses. Prefer updating the container's state over rebuilding an almost identical scene, and reserve hard cuts for genuine narrative-world changes.
+- Treat semantic peers as one geometric system: use equal dimensions, a shared baseline or deliberate symmetry, optically equal spacing, and a balanced group center. Do not place one peer on a separate axis unless the narration declares a hierarchy.
+- Draw relationship connectors from actual rendered boundary to actual rendered boundary. Reject gaps, penetration through cards, inconsistent closure, or branch geometry that implies a false hierarchy. Remove every undeclared element from the previous state when the new state begins.
 - Learn component structure, layout, motion, and narration timing from approved references without importing their palette; `references/style-system.md` remains the color authority.
 - Reject corner-only activity, repeated microcards, jitter, decorative continuous motion, background-only motion, and progress bars unrelated to spoken progress.
 - Use HyperFrames as the primary motion engine.
@@ -53,6 +55,8 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 - Apply subtitles after every visual overlay.
 - Permit only one encoder process per output path. Render to a unique temporary filename, validate it, then replace the final path.
 - Do not claim completion until continuous decode, representative frames, boundaries, actual-pixel layout, subtitle placement, and audio integrity pass.
+- HyperFrames lint/inspect cannot prove optical balance or connector topology. Final review must separately pass peer balance, connector closure, and stale-element removal on actual composed frames.
+- Reject silent pixel corruption: decode-exit-0 does not prove pixel integrity. Compose with `-filter_complex_threads 1` and run a full-timeline mid-band frame-delta scan (`crop=iw:ih*0.4:0:ih*0.35,select='gt(scene,0.10)'`) plus `blackdetect` on the composed final; whitelist expected boundaries, inspect every other hit visually, and reject the deliverable on any garbage frame. See `references/failure-recovery.md` §6.
 - Create `edit/quality-contract.json` for every output and pass its plan, prototype, and final gates. A new conversation must rely on this artifact, not prior chat context.
 - Keep complete short titles, process steps, and information points on one line when measured space permits. Do not create unnecessary forced wraps or a compact center blob on a wide canvas.
 
@@ -185,6 +189,8 @@ python3 scripts/validate_delivery.py \
 ```
 
 Inspect opening, ending, every transition/boundary, each hero frame, and subject/evidence safety. Rename to `<edit>/final.mp4` only after validation passes.
+
+3. Run the full-timeline corruption scan from `references/failure-recovery.md` §6 (mid-band `scene>0.10` scan plus `blackdetect`), whitelist known boundaries, and visually inspect every remaining hit before promotion. A garbage or macroblock frame rejects the attempt.
 
 Extract boundary and hero-frame evidence from the composed output, record separate visual/subtitle/layout review results, and pass `scripts/validate_quality_contract.py <edit>/quality-contract.json --stage final`. Both delivery validation and this final quality gate must pass before promotion to `final.mp4`.
 
