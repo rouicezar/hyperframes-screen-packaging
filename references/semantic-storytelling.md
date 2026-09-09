@@ -56,6 +56,8 @@ These are minimum effective bounds, not instructions to stretch every component.
 
 ## 4. Expand spoken semantics into action
 
+For concrete component choices and expression sequences, read [component-expression.md](component-expression.md). Record the chosen recipe, template seed, initial object state, operation, retained result, and handoff in the existing design table. Map those decisions into the storyboard fields below; keep identity across clauses instead of resetting the scene.
+
 Translate language into a visual mechanism:
 
 | Spoken meaning | Primary enactment |

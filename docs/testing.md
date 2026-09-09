@@ -1,5 +1,17 @@
 # Cross-conversation stability calibration test record
 
+## Component expression update (2026-09-10)
+
+- Manifest fixtures: PASS, 5/5.
+- Semantic storyboard fixtures: PASS.
+- Quality-contract fixtures: PASS.
+- Skill quick validation: PASS.
+- `git diff --check`: PASS.
+- `references/style-system.md`: unchanged from HEAD; palette preserved.
+- Reviewed recipe template IDs against the existing 20-template router; the new guidance explicitly distinguishes construction recipes from prebuilt assets.
+- Scope: documentation/workflow improvement only. No new component renders or production-video acceptance are claimed; real-audio prototype and final visual gates remain required when applying the recipes.
+- Installed the five changed production files; full source/install production-tree SHA256 parity: PASS (ignoring `.DS_Store` and Python caches). Installed Skill quick validation: PASS with Python 3.12.6; the repository-selected Python lacked PyYAML, so the already available runtime was used.
+
 Date: 2026-08-09
 
 ## Automated gates

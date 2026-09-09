@@ -1,5 +1,11 @@
 # Semantic narrative revision requirements
 
+## Component expression update (2026-09-10)
+
+User request: learn from anything2explainer's components and expression process while keeping our colors unchanged. Improve the existing Skill, retaining HyperFrames, source audio/timing, and current acceptance gates.
+
+Acceptance: provide actionable component/state recipes linked to the existing 20-template router; show how related clauses retain objects and change their roles; include a worked narration example. Keep the current palette file byte-identical. Do not import third-party source, assets, fixed-resolution thresholds, or decorative motion requirements. Verify Skill discovery, existing gates, source/install parity, and record that these recipes still require real-footage prototype review when used.
+
 ## Goal
 
 Make spoken-video packaging behave like video storytelling rather than animated slides. The main composition must enact the current spoken meaning and change at sentence-level semantic beats.

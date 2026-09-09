@@ -1,5 +1,9 @@
 # Semantic narrative revision development plan
 
+## Component expression update (2026-09-10)
+
+Implemented 12 original expression recipes and a worked four-clause token-budget sequence in `references/component-expression.md`. Linked the recipes from Skill discovery, template selection, semantic planning, and workflow. Kept existing palette, renderer, storyboard schema, and production gates unchanged. No third-party source/assets were imported. Existing manifest, semantic, and quality-contract tests and Skill quick validation pass. Release synchronization and commit/push are recorded in the task delivery.
+
 1. Add the semantic storytelling reference.
 2. Add the storyboard validator.
 3. Integrate both into the Skill contract and workflow.

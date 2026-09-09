@@ -14,6 +14,7 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 3. Read `references/semantic-storytelling.md`.
 4. Read `references/workflow.md`.
 5. Read `references/motion-library.md` when abstract, data, process, concept, or blank-screen packaging is needed.
+   For those segments, read `references/component-expression.md` to turn a selected template into an object-level expression process with a readable result and cross-clause handoff.
 6. Read `references/boundary-and-compositing.md` before inserting full-frame or timed overlays.
 7. Read `references/subtitles.md` when subtitles exist or must be created.
 8. Read `references/failure-recovery.md` before final rendering.
@@ -46,6 +47,7 @@ Turn rough-cut spoken videos into polished deliverables. Adapt the workflow to t
 - Reject corner-only activity, repeated microcards, jitter, decorative continuous motion, background-only motion, and progress bars unrelated to spoken progress.
 - Use HyperFrames as the primary motion engine.
 - Match suitable abstract/data/process/concept segments against the 20-template router before creating a new component. Do not force those templates onto footage where they do not fit.
+- Use component-expression recipes to specify the visible operation, retained result, and object handoff; template labels alone are not a design. Keep the existing palette and implement missing behavior in HyperFrames.
 - Treat user-provided voiceover and subtitle text as authoritative.
 - When black or blank intervals exist, use subtitles to locate their meaning and actual pixels to determine frame-accurate in/out points.
 - Do not require black frames. For videos with no black/blank interval, package with safe overlays, reframing, focus treatments, lower thirds, picture-in-picture, B-roll, or deliberate semantic replacement based on the source evidence.

@@ -184,6 +184,8 @@ For any scene with three or more related components, also record the peer layout
 
 Select the template by claim structure, not surface appearance. A list of tools converging on one model is a concept/relationship, not automatically a ranking. Dates imply a timeline. A prerequisite and later stage imply status/flow, not numerical comparison.
 
+For abstract/process inserts, use `component-expression.md` after template selection. Add its compact expression table to `design.md`: spoken trigger, recipe/template seed, initial object, visible operation/result, and retained/removed/handed-off objects. Carry the same object identities across related clauses. Recipe selection does not change the palette, source timeline, or prototype requirement.
+
 For every sentence or independently meaningful clause, identify the semantic object, action, state change, and result. Classify it as batch, singleton, or transformation. Read `semantic-storytelling.md`; do not substitute repeated labels or decorative motion for enactment.
 
 ## 7. Semantic storyboard gate

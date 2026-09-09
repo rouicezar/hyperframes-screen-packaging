@@ -1,5 +1,9 @@
 # Semantic narrative revision design
 
+## Component expression update (2026-09-10)
+
+Add `references/component-expression.md` as design guidance for abstract/process inserts. Each recipe names suitable existing template seeds, visible objects, state progression, retained result, and likely failure. Recipes are construction instructions, not claims of new prebuilt templates. Record recipe choice and object handoff in the existing design document; keep the validated storyboard schema unchanged. Link the reference from the Skill, motion router guidance, and semantic workflow. Use original HyperFrames implementations when a production slot needs a missing primitive.
+
 ## Storyboard contract
 
 Use one JSON object per output with canvas safe-zone dimensions and an ordered list of beats. Every beat declares:

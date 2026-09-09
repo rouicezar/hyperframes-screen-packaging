@@ -14,6 +14,8 @@ Only create a new component when no template matches. If the new component is re
 
 ## Semantic Groups
 
+After choosing a template seed, use [component-expression.md](component-expression.md) to design the object's state progression. It covers transformation, split, filter, merge, budget consumption, detour removal, dependencies, layers, loops, comparisons, evidence, and analogy. These recipes supplement the 20 templates; they are not additional prebuilt render assets. Prefer the recipe's actual mechanism over merely changing a template's title.
+
 - Numbers and data: `bar-chart-grow`, `number-counter`, `line-chart-draw`, `metric-pulse`, `big-number-card`, `before-after-stat`, `horizontal-bar-compare`, `top-rank-list`, `turning-point-line`.
 - Evidence and comparison: `source-citation-card`, `stat-duel`, `status-split`, `number-impact`.
 - Knowledge explanation: `concept-spotlight`, `three-step-flow`, `myth-fact-swap`, `key-point-marker`, `checklist-pop`, `timeline-scan`, `cause-chain`.
